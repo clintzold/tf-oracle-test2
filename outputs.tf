@@ -15,5 +15,5 @@ output "vcn_id" {
 
 output "vcn_cidr_blocks" {
   description = "The CIDR blocks range for the created VCN"
-  value       = oci_core_vcn.this.cidr_blocks
+  value       = join(", ", oci_core_vcn.this.cidr_blocks)
 }
