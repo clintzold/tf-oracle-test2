@@ -3,16 +3,19 @@
 variable "tenancy_ocid" {
   type        = string
   description = "Oracle tenancy id"
+  default     = null
 }
 
 variable "user_ocid" {
   type        = string
   description = "Oracle user id"
+  default     = null
 }
 
 variable "fingerprint" {
   type        = string
   description = "value"
+  default     = null
 }
 
 variable "private_key_path" {
