@@ -37,13 +37,14 @@ variable "region" {
   default     = "ca-toronto-1"
 }
 
-
-# Compartment variables
-variable "compartment_name" {
+variable "environment" {
   type        = string
-  description = "Variable for compartment name passed in env (e.g., 'ldap_relay_dev' or 'ldap_relay_prod')"
+  description = "Environment name used for naming resources"
+  default     = "dev"
 }
 
+
+# Compartment variables
 variable "allow_delete_compartment" {
   type    = bool
   default = true
@@ -52,6 +53,7 @@ variable "allow_delete_compartment" {
 variable "parent_compartment_ocid" {
   type        = string
   description = "OCID of parent compartment (use tenancy_ocid if using root!)"
+  default     = null
 }
 
 
@@ -65,14 +67,4 @@ variable "vcn_cidr_blocks" {
     condition     = alltrue([for cidr in var.vcn_cidr_blocks : can(cidrhost(cidr, 0))])
     error_message = "All entries in vcn_cidr_blocks must be in valid IPv4 CIDR notation"
   }
-}
-
-variable "vcn_display_name" {
-  type        = string
-  description = "Name of VCN displayed in OCI"
-}
-
-variable "vcn_dns_label" {
-  type        = string
-  description = "Label for OCI's built-in internal DNS resolution for compute instances"
 }
