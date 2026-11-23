@@ -1,0 +1,58 @@
+title: "OCI Secure Access LDAP relay"
+description: "Provisions an isolated OCI compartment and Virtual Cloud Network and relevant infrastructure as a secure LDAP relay provider."
+schemaVersion: 1.1.0
+version: '20261122'
+
+variableGroups:
+  - title: "Environment & Region"
+    variables:
+      - region
+      - environment
+
+  - title: "Network Configuration"
+    variables:
+      - vcn_cidr_blocks
+
+  # Hide local-only CLI auth variabled from the resource manager
+  - title: "Hidden Local CLI Auth"
+    visible: false
+    variables:
+      - tenancy_ocid
+      - user_ocid
+      - fingerprint
+      - private_key_path
+      - private_key
+
+variables:
+  region:
+    type: oci:identity:region:name
+    title: "OCI Region"
+    description: "Select the target OCI region for deployment."
+    required: true
+
+  environment:
+    type: enum
+    title: "Environment"
+    description: "Deployment environment name (used for resource naming)."
+    enum:
+      - dev
+      - prod
+    default: dev
+    required: true
+
+  parent_compartment_ocid:
+    type: oci:identity:compartment:id
+    title: "Parent Compartment"
+    description: "Select the parent compartment (defaults to the Tenancy root)"
+    required: false
+
+  vcn_cidr_blocks:
+    type: array
+    title: "VCN CIDR Blocks"
+    description: "IPv4 CIDR blocks assigned to the VCN."
+    items:
+      type: string
+      pattern: "^([0-9]{1,3}\\.){3}[0-9]{1,3}/([0-9]|[1-2][0-9]|3[0-2])$"
+      default:
+        - "10.0.0.0/16"
+      required: true

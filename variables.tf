@@ -37,13 +37,14 @@ variable "region" {
   default     = "ca-toronto-1"
 }
 
-
-# Compartment variables
-variable "compartment_name" {
+variable "environment" {
   type        = string
-  description = "Variable for compartment name passed in env (e.g., 'ldap_relay_dev' or 'ldap_relay_prod')"
+  description = "Environment name used for naming resources"
+  default     = "dev"
 }
 
+
+# Compartment variables
 variable "allow_delete_compartment" {
   type    = bool
   default = true
@@ -52,6 +53,7 @@ variable "allow_delete_compartment" {
 variable "parent_compartment_ocid" {
   type        = string
   description = "OCID of parent compartment (use tenancy_ocid if using root!)"
+  default     = null
 }
 
 
