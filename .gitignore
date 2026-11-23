@@ -26,3 +26,6 @@ terraform.rc
 # Extra safety: prevent accidental commit of private keys in the repo
 *.pem
 *.key
+
+# Don't commit lockfile (goes against Hashicorps recommendations but should be done for OCI Resource Manager's sake)
+.terraform.lock.hcl
