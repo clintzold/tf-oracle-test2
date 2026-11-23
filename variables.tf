@@ -68,13 +68,3 @@ variable "vcn_cidr_blocks" {
     error_message = "All entries in vcn_cidr_blocks must be in valid IPv4 CIDR notation"
   }
 }
-
-variable "vcn_display_name" {
-  type        = string
-  description = "Name of VCN displayed in OCI"
-}
-
-variable "vcn_dns_label" {
-  type        = string
-  description = "Label for OCI's built-in internal DNS resolution for compute instances"
-}
